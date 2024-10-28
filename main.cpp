@@ -12,7 +12,9 @@ using namespace std::chrono;
 
 const int CODES_SZ = 20000;
 
-
+// Prototypes
+steady_clock::time_point time_start();
+int time_end(steady_clock::time_point start);
 
 int main() {
     vector<string> vec;
@@ -31,49 +33,21 @@ int main() {
 
     // read
 
-    auto start = high_resolution_clock::now();
+    auto start = time_start();
+
     for (int i = 0; i < CODES_SZ; i++)
         vec.push_back(codes[i]);
+
+    auto vecRead = time_end(start);
+
+    start = time_start();
+
     for (int i = 0; i < CODES_SZ; i++)
-        vec.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        vec.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        vec.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        vec.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        vec.push_back(codes[i]);
-    auto end = high_resolution_clock::now();
-    auto vecRead = duration_cast<milliseconds>(end - start).count();
+        lis.push_back(codes[i]);
+
+    auto lisRead = time_end(start);
 
     start = high_resolution_clock::now();
-    for (int i = 0; i < CODES_SZ; i++)
-        lis.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        lis.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        lis.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        lis.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        lis.push_back(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        lis.push_back(codes[i]);
-    end = high_resolution_clock::now();
-    auto lisRead = duration_cast<milliseconds>(end - start).count();
-
-    start = high_resolution_clock::now();
-    for (int i = 0; i < CODES_SZ; i++)
-        se.insert(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        se.insert(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        se.insert(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        se.insert(codes[i]);
-    for (int i = 0; i < CODES_SZ; i++)
-        se.insert(codes[i]);
     for (int i = 0; i < CODES_SZ; i++)
         se.insert(codes[i]);
     end = high_resolution_clock::now();
@@ -113,7 +87,7 @@ int main() {
     start = high_resolution_clock::now();
     se.insert("TESTCODE");
     end = high_resolution_clock::now();
-     setRead = duration_cast<milliseconds>(end - start).count();
+    setRead = duration_cast<milliseconds>(end - start).count();
 
     cout << vecRead << " " << lisRead << " " << setRead << endl;
 
@@ -133,16 +107,18 @@ int main() {
     start = high_resolution_clock::now();
     se.erase("eohGGM1Q");
     end = high_resolution_clock::now();
-     setRead = duration_cast<milliseconds>(end - start).count();
+    setRead = duration_cast<milliseconds>(end - start).count();
 
     cout << vecRead << " " << lisRead << " " << setRead << endl;
 
     return 0;
 }
 
-/* syntax examples:
-auto start = high_resolution_clock::now()
-auto end = high_resolution_clock::now()
-auto duration = duration_cast<milliseconds>(end - start)
-duration.count() references elapsed milliseconds
-*/
+steady_clock::time_point time_start(){
+    return high_resolution_clock::now();
+}
+
+int time_end(steady_clock::time_point start){
+    auto end = high_resolution_clock::now();
+    return duration_cast<milliseconds>(end - start).count();
+}
