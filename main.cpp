@@ -34,16 +34,46 @@ int main() {
     auto start = high_resolution_clock::now();
     for (int i = 0; i < CODES_SZ; i++)
         vec.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        vec.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        vec.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        vec.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        vec.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        vec.push_back(codes[i]);
     auto end = high_resolution_clock::now();
     auto vecRead = duration_cast<milliseconds>(end - start).count();
 
     start = high_resolution_clock::now();
     for (int i = 0; i < CODES_SZ; i++)
         lis.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        lis.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        lis.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        lis.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        lis.push_back(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        lis.push_back(codes[i]);
     end = high_resolution_clock::now();
     auto lisRead = duration_cast<milliseconds>(end - start).count();
 
     start = high_resolution_clock::now();
+    for (int i = 0; i < CODES_SZ; i++)
+        se.insert(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        se.insert(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        se.insert(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        se.insert(codes[i]);
+    for (int i = 0; i < CODES_SZ; i++)
+        se.insert(codes[i]);
     for (int i = 0; i < CODES_SZ; i++)
         se.insert(codes[i]);
     end = high_resolution_clock::now();
@@ -95,13 +125,13 @@ int main() {
     vecRead = duration_cast<milliseconds>(end - start).count();
 
     start = high_resolution_clock::now();
-    list<string>::iterator it = lis.begin(); advance(it, CODES_SZ/2);
-    lis.insert(it, "TESTCODE");
+    it = lis.begin(); advance(it, CODES_SZ/2);
+    lis.erase(it);
     end = high_resolution_clock::now();
     lisRead = duration_cast<milliseconds>(end - start).count();
 
     start = high_resolution_clock::now();
-    se.insert("TESTCODE");
+    se.erase("eohGGM1Q");
     end = high_resolution_clock::now();
      setRead = duration_cast<milliseconds>(end - start).count();
 
