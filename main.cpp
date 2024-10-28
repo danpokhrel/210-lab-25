@@ -14,8 +14,8 @@ using namespace std::chrono;
 const int CODES_SZ = 20000;
 
 // Prototypes
-steady_clock::time_point time_start();
-int time_end(steady_clock::time_point start);
+high_resolution_clock::time_point time_start();
+int time_end(high_resolution_clock::time_point start);
 
 int main() {
     vector<string> vec;
@@ -138,11 +138,11 @@ int main() {
     return 0;
 }
 
-steady_clock::time_point time_start(){
+high_resolution_clock::time_point time_start(){
     return high_resolution_clock::now();
 }
 
-int time_end(steady_clock::time_point start){
+int time_end(high_resolution_clock::time_point start){
     auto end = high_resolution_clock::now();
     return duration_cast<milliseconds>(end - start).count();
 }
