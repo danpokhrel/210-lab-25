@@ -1,5 +1,6 @@
 // COMSC-210 | Lab 25 | Dan Pokhrel
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include <chrono>
@@ -31,85 +32,108 @@ int main() {
         i++;
     }
 
+    cout << " Operation    Vector      List       Set\n";
+
     // read
 
     auto start = time_start();
-
+    // ---------------------------------------------------------------
     for (int i = 0; i < CODES_SZ; i++)
         vec.push_back(codes[i]);
-
     auto vecRead = time_end(start);
+    // ---------------------------------------------------------------
 
     start = time_start();
-
+    // ---------------------------------------------------------------
     for (int i = 0; i < CODES_SZ; i++)
         lis.push_back(codes[i]);
-
+    // ---------------------------------------------------------------
     auto lisRead = time_end(start);
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     for (int i = 0; i < CODES_SZ; i++)
         se.insert(codes[i]);
-    end = high_resolution_clock::now();
-    auto setRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    auto setRead = time_end(start);
 
-    cout << vecRead << " " << lisRead << " " << setRead << endl;
+    cout << setw(10) << "Read";
+    cout << setw(10) << vecRead
+        << setw(10) << lisRead
+        << setw(10) << setRead << endl;
 
     // sort
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     sort(vec.begin(), vec.end());
-    end = high_resolution_clock::now();
-    vecRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    vecRead = time_end(start);
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     lis.sort();
-    end = high_resolution_clock::now();
-    lisRead = duration_cast<milliseconds>(end - start).count();
-
+    // ---------------------------------------------------------------
+    lisRead = time_end(start);
+    
     setRead = -1;
 
-    cout << vecRead << " " << lisRead << " " << setRead << endl;
+    cout << setw(10) << "Sort";
+    cout << setw(10) << vecRead
+        << setw(10) << lisRead
+        << setw(10) << setRead << endl;
 
     // insert
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     vec.insert(vec.begin() + CODES_SZ/2, "TESTCODE");
-    end = high_resolution_clock::now();
-    vecRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    vecRead = time_end(start);
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     list<string>::iterator it = lis.begin(); advance(it, CODES_SZ/2);
     lis.insert(it, "TESTCODE");
-    end = high_resolution_clock::now();
-    lisRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    lisRead = time_end(start);
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     se.insert("TESTCODE");
-    end = high_resolution_clock::now();
-    setRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    setRead = time_end(start);
 
-    cout << vecRead << " " << lisRead << " " << setRead << endl;
+    cout << setw(10) << "Insert";
+    cout << setw(10) << vecRead
+        << setw(10) << lisRead
+        << setw(10) << setRead << endl;
 
     // delete
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     vec.erase(vec.begin() + CODES_SZ/2);
-    end = high_resolution_clock::now();
-    vecRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    vecRead = time_end(start);
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     it = lis.begin(); advance(it, CODES_SZ/2);
     lis.erase(it);
-    end = high_resolution_clock::now();
-    lisRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    lisRead = time_end(start);
 
-    start = high_resolution_clock::now();
+    start = time_start();
+    // ---------------------------------------------------------------
     se.erase("eohGGM1Q");
-    end = high_resolution_clock::now();
-    setRead = duration_cast<milliseconds>(end - start).count();
+    // ---------------------------------------------------------------
+    setRead = time_end(start);
 
-    cout << vecRead << " " << lisRead << " " << setRead << endl;
+    cout << setw(10) << "Delete";
+    cout << setw(10) << vecRead
+        << setw(10) << lisRead
+        << setw(10) << setRead << endl;
 
     return 0;
 }
